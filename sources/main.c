@@ -50,27 +50,18 @@ int	isupper(int c)
 	return (c >= 'A' && c <= 'Z');
 }
 
-t_err	extract_var(t_bst *bst, char *line)
+t_err	extract_var(t_bst **bst, char *line)
 {
 	char	*temp;
-	char	*name;
-	char	*value;
 
 	temp = ft_strchrf(line, is_empty, 0);
 	if (!temp)
-		return (0 & ft_printf("Warning: missing value '%s'\n", line));
-	name = ft_substr(line, 0, temp - line);
-	if (!name)
-		return (ERR_MALLOC);
-	temp = ft_strchrf(temp, is_empty, 1);
+		return (0 & ft_printf("Warning: missing value '%s' 0\n", line));
+	temp[0] = 0;
+	temp = ft_strchrf(temp + 1, is_empty, 1);
 	if (!temp)
-		return (0 & ft_printf("Warning: missing value '%s'\n", line));
-	value = ft_substr(temp, 0, ft_strlen(temp));
-	if (!value)
-		return (free(name), ERR_MALLOC);
-	ft_bst_setvar(&bst, name, value);
-	free(name);
-	free(value);
+		return (0 & ft_printf("Warning: missing value '%s' 1\n", line));
+	ft_bst_setvar(bst, line, temp);
 	return (0);
 }
 
@@ -80,7 +71,7 @@ char	*next_line(char **lines, int *line_index)
 
 	while (lines && lines[*line_index])
 	{
-		out = ft_strchrf(lines[(*lines_index)++], is_empty, 1);
+		out = ft_strchrf(lines[(*line_index)++], is_empty, 1);
 		if (out)
 			return (out);
 	}
@@ -90,12 +81,12 @@ char	*next_line(char **lines, int *line_index)
 t_err	load_map_header(t_map *map, char **lines, int *line_index)
 {
 	char	*line;
-	int		err;
+	t_err	err;
 
 	line = next_line(lines, line_index);
 	while (line && (is_empty_str(line) || isupper(line[0])))
 	{
-		err = extract_var(map->infos, line);
+		err = extract_var(&map->infos, line);
 		if (err)
 			return (err);
 		line = next_line(lines, line_index);
@@ -122,8 +113,9 @@ t_err	load_map(t_map *out, char *path)
 	char	*temp;
 	char	**lines;
 	int		line_index;
-	int		err;
+	t_err	err;
 
+	ft_memset(out, 0, sizeof(t_map));
 	ft_get_file(&temp, path, 256);
 	lines = ft_split(temp, '\n');
 	free(temp);
@@ -133,13 +125,14 @@ t_err	load_map(t_map *out, char *path)
 	if (err)
 		return (err);
 	ft_bst_print(out->infos);
+	ft_strarrfree(lines);
 	return (0);
 }
 
 int	main(int argc, char **argv)
 {
 	t_map	map;
-	int		err;
+	t_err	err;
 
 	if (argc == 1)
 	{
@@ -150,6 +143,8 @@ int	main(int argc, char **argv)
 	err = load_map(&map, argv[1]);
 	if (err)
 		print_error(err);
+
+	ft_bst_free(&map.infos);
 
 	return (0);
 }
