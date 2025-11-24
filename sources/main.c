@@ -143,8 +143,6 @@ int	main(int argc, char **argv)
 	err = load_map(&map, argv[1]);
 	if (err)
 		print_error(err);
-
 	ft_bst_free(&map.infos);
-
 	return (0);
 }

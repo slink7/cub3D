@@ -22,7 +22,6 @@ SOURCE_DIRECTORY = sources
 
 SOURCES =\
 	main.c\
-	parsing/file.c
 
 CFLAGS = -Wall -Werror -Wextra -g3
 
