@@ -44,15 +44,32 @@ typedef struct s_display
 	t_display_type	type;
 }	t_display;
 
-#define NO 0
-#define EA 1
-#define SO 2
-#define WE 3
+#define NORTH	0
+#define EAST	1
+#define SOUTH	2
+#define WEST	3
+#define FLOOR	4
+#define CEILING	5
 
 typedef struct s_map
 {
-	t_bst		*infos;
+	t_display	displays[6];
 	char		**tiles;
 }	t_map;
+
+// Error
+
+#define ERR_WRONG	0
+#define ERR_ARGS	1
+#define ERR_MALLOC	2
+#define ERR_HEADER	3
+
+typedef unsigned int	t_err;
+
+void	print_error(t_err code);
+
+// Load map header
+
+t_err	handle_map_header(t_map *out, char **lines, int *line_index);
 
 #endif

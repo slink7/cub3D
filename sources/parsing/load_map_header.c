@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   load_map_header.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: scambier <scambier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/18 20:12:12 by scambier          #+#    #+#             */
-/*   Updated: 2025/11/24 16:18:34 by scambier         ###   ########.fr       */
+/*   Created: 2025/11/24 15:22:55 by scambier          #+#    #+#             */
+/*   Updated: 2025/11/24 15:27:24 by scambier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,6 @@
 
 #include "libft.h"
 #include "cub3D.h"
-
-#ifdef E
-
-#define ERR_WRONG	0
-#define ERR_ARGS	1
-#define ERR_MALLOC	2
-#define ERR_HEADER	3
-
-const char	*error_list[] = {
-	"Wrong error code",
-	"Not enough arguments",
-	"Malloc failed",
-	"Incomplete map header"
-};
-
-
-void	print_error(t_err code)
-{
-	if (code >= sizeof(error_list) / sizeof(char *))
-		print_error(0);
-	else
-		ft_dprintf(2, "\e[38;2;255;0;0mError\n%s\n\e[0m", error_list[code]);
-}
-
 
 t_err	extract_var(t_bst **bst, char *line)
 {
@@ -113,15 +89,6 @@ t_err	load_display(t_display *out, char *in)
 	return (0);
 }
 
-void	print_display(t_display *d)
-{
-	if (d->type == COLOR) {
-		ft_printf("Type Color: %d (%d, %d, %d)\n", d->data.color.hexa, d->data.color.rgba[R], d->data.color.rgba[G], d->data.color.rgba[B]);
-	} else if (d->type == PATH) {
-		ft_printf("Type Path: %s\n", d->data.path);
-	}
-}
-
 t_err	parse_map_header(t_map *map, t_bst *infos)
 {
 	static char	*required_var[] = {
@@ -161,50 +128,4 @@ t_err	handle_map_header(t_map *map, char **lines, int *line_index)
 	if (err)
 		return (ft_bst_free(&infos), err);
 	return (ft_bst_free(&infos), 0);
-}
-
-t_err	load_map_tiles()
-{
-	return (0);
-}
-
-t_err	load_map(t_map *out, char *path)
-{
-	char	*temp;
-	char	**lines;
-	int		line_index;
-	t_err	err;
-
-	ft_memset(out, 0, sizeof(t_map));
-	ft_get_file(&temp, path, 256);
-	lines = ft_split(temp, '\n');
-	free(temp);
-	line_index = 0;
-	err = handle_map_header(out, lines, &line_index);
-	if (err)
-		return (err);
-	ft_strarrfree(lines);
-	return (0);
-}
-
-#endif
-
-t_err	load_map(t_map *out, char *path);
-void	print_error(t_err code);
-
-int	main(int argc, char **argv)
-{
-	t_map	map;
-	t_err	err;
-
-	if (argc == 1)
-	{
-		print_error(ERR_ARGS);
-		return (1);
-	}
-
-	err = load_map(&map, argv[1]);
-	if (err)
-		print_error(err);
-	return (0);
 }
