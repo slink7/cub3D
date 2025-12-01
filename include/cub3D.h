@@ -6,7 +6,7 @@
 /*   By: scambier <scambier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 19:10:01 by scambier          #+#    #+#             */
-/*   Updated: 2025/11/30 19:14:37 by scambier         ###   ########.fr       */
+/*   Updated: 2025/12/01 01:59:25 by scambier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 #define CUB3D_H
 
 #include "bst.h"
-
-#define R 0
-#define G 1
-#define B 2
-#define A 3
 
 typedef struct s_image
 {
@@ -40,14 +35,6 @@ typedef struct s_texture
 	t_image			*images[2];
 	unsigned int	image_count;
 }	t_texture;
-
-
-typedef union u_color
-{
-	int		hexa;
-	char	rgba[4];
-}	t_color;
-
 
 typedef union u_surface_data
 {

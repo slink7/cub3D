@@ -17,7 +17,7 @@ void	print_surface(t_surface *surface)
 	unsigned int	k;
 
 	if (surface->type == COLOR)
-		ft_printf("Color: %#08x\n", surface->data.color.hexa);
+		ft_printf("Color: %#08x\n", surface->data.color.raw);
 	else
 	{
 		texture = surface->data.texture;
