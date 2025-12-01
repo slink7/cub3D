@@ -6,7 +6,7 @@
 #    By: scambier <scambier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/22 16:14:03 by scambier          #+#    #+#              #
-#    Updated: 2025/11/24 16:17:50 by scambier         ###   ########.fr        #
+#    Updated: 2025/12/01 02:01:53 by scambier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,21 +23,24 @@ SOURCE_DIRECTORY = sources
 SOURCES =\
 	main.c\
 	error.c\
-	debug.c\
+	texture_list.c\
 	parsing/load_map_content.c\
-	parsing/load_map_header.c
+	parsing/load_map_header.c\
+	debug.c
 
 
 CFLAGS = -Wall -Werror -Wextra -g3
 
-LFLAGS =
+LFLAGS =\
+	-L/usr/lib/X11 -lXext -lX11 -lm -lz -no-pie
 
 HEADERS =\
 	-I./\
-	-Iinclude/
+	-Iinclude/\
 
 LIBRARIES = \
-	libft/libft.a
+	libft/libft.a\
+	mlx/libmlx.a
 
 OBJECT_DIRECTORY = objects
 
