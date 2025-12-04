@@ -6,7 +6,7 @@
 /*   By: scambier <scambier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 19:10:01 by scambier          #+#    #+#             */
-/*   Updated: 2025/12/01 01:59:25 by scambier         ###   ########.fr       */
+/*   Updated: 2025/12/01 23:47:28 by scambier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define CUB3D_H
 
 #include "bst.h"
+#include "color.h"
 
 typedef struct s_image
 {
@@ -55,16 +56,17 @@ typedef struct s_surface
 	t_surface_type	type;
 }	t_surface;
 
-#define NORTH	0
-#define EAST	1
-#define SOUTH	2
-#define WEST	3
-#define FLOOR	4
-#define CEILING	5
+#define NORTH		0
+#define EAST		1
+#define SOUTH		2
+#define WEST		3
+#define FLOOR		4
+#define CEILING		5
+#define SURF_COUNT	6
 
 typedef struct s_map
 {
-	t_surface	surfaces[6];
+	t_surface	surfaces[SURF_COUNT];
 	char		**tiles;
 }	t_map;
 
@@ -81,6 +83,6 @@ void	print_error(t_err code);
 
 // Load map header
 
-t_err	handle_map_header(t_map *out, char **lines, int *line_index);
+t_err	load_map_header(t_map *out, char **lines, int *line_index);
 
 #endif

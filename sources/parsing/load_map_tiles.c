@@ -1,38 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   load_map_tiles.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: scambier <scambier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/18 20:12:12 by scambier          #+#    #+#             */
-/*   Updated: 2025/12/01 23:44:48 by scambier         ###   ########.fr       */
+/*   Created: 2025/12/01 23:30:13 by scambier          #+#    #+#             */
+/*   Updated: 2025/12/01 23:48:06 by scambier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-#include "libft.h"
 #include "cub3D.h"
+#include "mem.h"
+#include "str.h"
 
-t_err	load_map(t_map *out, char *path);
-void	print_error(t_err code);
-void	print_map(t_map *map);
-
-int	main(int argc, char **argv)
+t_err	load_map_tiles(t_map *map, char **lines, int *line_index)
 {
-	t_map	map;
-	t_err	err;
+	int	len;
+	int	k;
 
-	if (argc == 1)
+	len = ft_strarrlen(lines + *line_index);
+	map->tiles = ft_calloc(sizeof(char *), len + 1);
+	if (!map->tiles)
+		return (ERR_MALLOC);
+	k = -1;
+	while (++k < len)
 	{
-		print_error(ERR_ARGS);
-		return (1);
+		map->tiles[k] = ft_strdup(lines[*line_index + k]);
+		if (!map->tiles[k])
+			return (ERR_MALLOC);
 	}
-
-	err = load_map(&map, argv[1]);
-	if (err)
-		print_error(err);
-	print_map(&map);
 	return (0);
 }
+

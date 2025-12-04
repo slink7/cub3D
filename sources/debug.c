@@ -34,3 +34,18 @@ void	print_surface(t_surface *surface)
 		}
 	}
 }
+
+void	print_map(t_map *map)
+{
+	int k;
+
+	ft_printf("Map surfaces:\n");
+	k = -1;
+	while (++k < SURF_COUNT)
+		print_surface(map->surfaces + k);
+	ft_printf("Map tiles:\n");
+	k = -1;
+	while (map->tiles[++k])
+		ft_printf("%s.\n", map->tiles[k]);
+
+}

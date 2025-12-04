@@ -6,7 +6,7 @@
 #    By: scambier <scambier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/22 16:14:03 by scambier          #+#    #+#              #
-#    Updated: 2025/12/01 02:01:53 by scambier         ###   ########.fr        #
+#    Updated: 2025/12/01 23:46:54 by scambier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,9 +24,10 @@ SOURCES =\
 	main.c\
 	error.c\
 	texture_list.c\
-	parsing/load_map_content.c\
+	parsing/load_map_tiles.c\
 	parsing/load_map_header.c\
-	debug.c
+	parsing/load_map.c\
+	debug.c\
 
 
 CFLAGS = -Wall -Werror -Wextra -g3

@@ -6,7 +6,7 @@
 /*   By: scambier <scambier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 15:22:55 by scambier          #+#    #+#             */
-/*   Updated: 2025/12/01 02:00:48 by scambier         ###   ########.fr       */
+/*   Updated: 2025/12/01 23:31:03 by scambier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ t_err	parse_map_header(t_map *map, t_bst *infos)
 	return (0);
 }
 
-t_err	handle_map_header(t_map *map, char **lines, int *line_index)
+t_err	load_map_header(t_map *map, char **lines, int *line_index)
 {
 	t_bst	*infos;
 	t_err	err;
