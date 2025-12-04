@@ -15,10 +15,6 @@
 #include "libft.h"
 #include "cub3D.h"
 
-
-
-t_err	load_map_tiles(t_map *map, char **lines, int *line_index);
-
 t_err	load_map(t_map *out, char *path)
 {
 	char	*temp;
@@ -40,4 +36,9 @@ t_err	load_map(t_map *out, char *path)
 		return (err);
 	ft_strarrfree(lines);
 	return (0);
+}
+
+void	destroy_map(t_map *map)
+{
+	ft_strarrfree(map->tiles);
 }

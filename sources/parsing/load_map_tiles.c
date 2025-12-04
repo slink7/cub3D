@@ -14,6 +14,8 @@
 #include "mem.h"
 #include "str.h"
 
+
+
 t_err	load_map_tiles(t_map *map, char **lines, int *line_index)
 {
 	int	len;
@@ -32,4 +34,3 @@ t_err	load_map_tiles(t_map *map, char **lines, int *line_index)
 	}
 	return (0);
 }
-

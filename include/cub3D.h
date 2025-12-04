@@ -81,8 +81,21 @@ typedef unsigned int	t_err;
 
 void	print_error(t_err code);
 
+// Load map
+t_err	load_map(t_map *out, char *path);
+void	destroy_map(t_map *map);
 // Load map header
-
 t_err	load_map_header(t_map *out, char **lines, int *line_index);
+// Load map tiles
+t_err	load_map_tiles(t_map *map, char **lines, int *line_index);
+// Texture list
+t_texture	*create_texture(char *path);
+void		delete_texture_list(void *mlx);
+// debug
+void	print_image(t_image *image, char *name);
+void	print_surface(t_surface *surf);
+void	print_map(t_map *map);
+// error
+void	print_error(t_err code);
 
 #endif

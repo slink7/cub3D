@@ -16,9 +16,7 @@
 #include "color.h"
 #include "cub3D.h"
 
-t_texture	*create_texture(char *path);
-
-t_err	extract_var(t_bst **bst, char *line)
+static t_err	extract_var(t_bst **bst, char *line)
 {
 	char	*temp;
 
@@ -34,7 +32,7 @@ t_err	extract_var(t_bst **bst, char *line)
 	return (0);
 }
 
-char	*next_line(char **lines, int *line_index)
+static char	*next_line(char **lines, int *line_index)
 {
 	char	*out;
 	while (lines && lines[*line_index])
@@ -46,7 +44,7 @@ char	*next_line(char **lines, int *line_index)
 	return (0);
 }
 
-t_err	read_map_header(t_bst **infos, char **lines, int *line_index)
+static t_err	read_map_header(t_bst **infos, char **lines, int *line_index)
 {
 	char	*line;
 	t_err	error;
@@ -63,7 +61,7 @@ t_err	read_map_header(t_bst **infos, char **lines, int *line_index)
 	return (0);
 }
 
-t_err	load_surface(t_surface *out, char *in)
+static t_err	load_surface(t_surface *out, char *in)
 {
 	if (ft_atoc(&out->data.color, in))
 		out->type = COLOR;
@@ -77,9 +75,7 @@ t_err	load_surface(t_surface *out, char *in)
 	return (0);
 }
 
-void	print_surface(t_surface *surf);
-
-t_err	parse_map_header(t_map *map, t_bst *infos)
+static t_err	parse_map_header(t_map *map, t_bst *infos)
 {
 	static char	*required_var[] = {
 		"NO",

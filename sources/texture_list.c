@@ -43,7 +43,7 @@ t_texture	*create_texture(char *path)
 	return (out);
 }
 
-void	delete_texture(void *content, void *mlx)
+static void	delete_texture(void *content, void *mlx)
 {
 	t_texture		*texture;
 	unsigned int	k;
