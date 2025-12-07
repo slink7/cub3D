@@ -15,10 +15,6 @@
 #include "libft.h"
 #include "cub3D.h"
 
-t_err	load_map(t_map *out, char *path);
-void	print_error(t_err code);
-void	print_map(t_map *map);
-
 int	main(int argc, char **argv)
 {
 	t_map	map;
@@ -31,6 +27,9 @@ int	main(int argc, char **argv)
 	}
 
 	err = load_map(&map, argv[1]);
+	if (err)
+		print_error(err);
+	err = validate_map(&map);
 	if (err)
 		print_error(err);
 	print_map(&map);

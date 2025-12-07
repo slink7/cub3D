@@ -15,6 +15,7 @@
 
 #include "bst.h"
 #include "color.h"
+#include "ftmath.h"
 
 typedef struct s_image
 {
@@ -64,10 +65,19 @@ typedef struct s_surface
 #define CEILING		5
 #define SURF_COUNT	6
 
+typedef struct s_player
+{
+	t_vec2f position;
+	float	direction;
+}	t_player;
+
 typedef struct s_map
 {
 	t_surface	surfaces[SURF_COUNT];
 	char		**tiles;
+	int			width;
+	int			height;
+	t_player	player;
 }	t_map;
 
 // Error
@@ -76,6 +86,8 @@ typedef struct s_map
 #define ERR_ARGS	1
 #define ERR_MALLOC	2
 #define ERR_HEADER	3
+#define ERR_MAP		4
+#define ERR_PLAYER	5
 
 typedef unsigned int	t_err;
 
@@ -87,6 +99,7 @@ void	destroy_map(t_map *map);
 // Load map header
 t_err	load_map_header(t_map *out, char **lines, int *line_index);
 // Load map tiles
+t_err	validate_map(t_map *map);
 t_err	load_map_tiles(t_map *map, char **lines, int *line_index);
 // Texture list
 t_texture	*create_texture(char *path);

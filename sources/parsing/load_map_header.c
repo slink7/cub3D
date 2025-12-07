@@ -22,11 +22,11 @@ static t_err	extract_var(t_bst **bst, char *line)
 
 	temp = ft_strchrf(line, ft_iswhitespace, 0);
 	if (!temp)
-		return (0 & ft_printf("Warning: missing value '%s'\n", line));
+		return (0 & ft_dprintf(2, "Warning: missing value '%s'\n", line));
 	temp[0] = 0;
 	temp = ft_strchrf(temp + 1, ft_iswhitespace, 1);
 	if (!temp)
-		return (0 & ft_printf("Warning: missing value '%s'\n", line));
+		return (0 & ft_dprintf(2, "Warning: missing value '%s'\n", line));
 	if (!ft_bst_setval(bst, line, temp))
 		return (ERR_MALLOC);
 	return (0);

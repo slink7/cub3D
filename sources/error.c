@@ -19,7 +19,9 @@ void	print_error(t_err code)
 		"Wrong error code",
 		"Not enough arguments",
 		"Malloc failed",
-		"Incomplete map header"
+		"Incomplete map header",
+		"Wrong map layout",
+		"Wrong player count"
 	};
 
 	if (code >= sizeof(error_list) / sizeof(char *))
